@@ -211,15 +211,28 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
     // pop
     if ([performAction isEqualToString:@"pop"]) {
         NSString *animationType = actionParams[@"animationType"];
+        NSNumber *goBackScreensCount = actionParams[@"goBackScreensCount"];
         if ([animationType isEqualToString:@"fade"]) {
             CATransition *transition = [CATransition animation];
             transition.duration = 0.25;
             transition.type = kCATransitionFade;
             
             [self.view.layer addAnimation:transition forKey:kCATransition];
-            [self popViewControllerAnimated:NO];
+            if([goBackScreensCount intValue]>1){
+                NSArray *viewControllers = [self viewControllers];
+                id obj=[viewControllers objectAtIndex:([viewControllers count] - 1 - [goBackScreensCount intValue]) ];
+                [self  popToViewController:obj animated:NO];
+            }else{
+                [self popViewControllerAnimated:NO];
+            }
         } else {
-            [self popViewControllerAnimated:animated];
+            if([goBackScreensCount intValue] > 1 ){
+                NSArray *viewControllers = [self viewControllers];
+                id obj=[viewControllers objectAtIndex:([viewControllers count] - 1 - [goBackScreensCount intValue])];
+                [self  popToViewController:obj animated:YES];
+            }else{
+                [self popViewControllerAnimated:animated];
+            }
         }
         return;
     }
