@@ -210,6 +210,9 @@ public class ScreenStack {
 
     private void popInternal(final boolean animated, double jsPopTimestamp, @Nullable final OnScreenPop onScreenPop) {
         final Screen toRemove = stack.pop();
+        for(int i = 1; i< toRemove.screenParams.goBackScreensCount; i++){
+            stack.pop();
+        }
         final Screen previous = stack.peek();
         previous.screenParams.timestamp = jsPopTimestamp;
         swapScreens(animated, toRemove, previous, onScreenPop);
