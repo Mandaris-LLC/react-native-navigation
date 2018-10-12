@@ -24,6 +24,7 @@ public class ScreenParamsParser extends Parser {
     private static final String FRAGMENT_CREATOR_PASS_PROPS = "fragmentCreatorPassProps";
     private static final String OVERRIDE_BACK_PRESS = "overrideBackPress";
     private static final String ANIMATION_TYPE = "animationType";
+    private static final String GO_BACK_SCREENS_COUNT = "goBackScreensCount";
 
     @SuppressWarnings("ConstantConditions")
     public static ScreenParams parse(Bundle params) {
@@ -60,7 +61,11 @@ public class ScreenParamsParser extends Parser {
         result.sharedElementsTransitions = getSharedElementsTransitions(params);
 
         result.animationType = params.getString(ANIMATION_TYPE, AppStyle.appStyle == null ? "" : AppStyle.appStyle.screenAnimationType);
-
+        if (hasKey(params, GO_BACK_SCREENS_COUNT)) {
+            result.goBackScreensCount = params.getInt(GO_BACK_SCREENS_COUNT);
+        }else{
+            result.goBackScreensCount = 1;
+        }
         return result;
     }
 
