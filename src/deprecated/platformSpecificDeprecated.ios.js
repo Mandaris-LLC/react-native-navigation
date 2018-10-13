@@ -382,7 +382,8 @@ function navigatorPop(navigator, params) {
   Controllers.NavigationControllerIOS(navigator.navigatorID).pop({
     animated: params.animated,
     animationType: params.animationType,
-    timestamp: Date.now()
+    timestamp: Date.now(),
+    goBackScreensCount: params.goBackScreensCount,
   });
 }
 
