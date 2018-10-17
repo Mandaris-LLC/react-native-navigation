@@ -88,7 +88,8 @@
     NSString *shadowOffsetKey = @"shadowOffset";
     NSString *shadowBlurRadiusKey = @"shadowBlurRadius";
     NSString *showShadowKey = @"showShadow";
-    
+    NSString *letterSpacingKey = @"letterSpacing";
+
     if (prefix) {
         
         colorKey = [colorKey stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[colorKey substringToIndex:1].capitalizedString];
@@ -117,6 +118,9 @@
         
         showShadowKey = [showShadowKey stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[showShadowKey substringToIndex:1].capitalizedString];
         showShadowKey = [NSString stringWithFormat:@"%@%@", prefix, showShadowKey];
+        
+        letterSpacingKey = [letterSpacingKey stringByReplacingCharactersInRange:NSMakeRange(0, 1) withString:[letterSpacingKey substringToIndex:1].capitalizedString];
+        letterSpacingKey = [NSString stringWithFormat:@"%@%@", prefix, letterSpacingKey];
     }
     
     NSShadow *shadow;
@@ -164,6 +168,12 @@
     {
         UIColor *color = [RCTConvert UIColor:textColor];
         [textAttributes setObject:color forKey:NSForegroundColorAttributeName];
+    }
+    
+    NSNumber *letterSpacing = dictionary[letterSpacingKey];
+    if (letterSpacing && [letterSpacing isKindOfClass:[NSNumber class]])
+    {
+        [textAttributes setObject:letterSpacing forKey:NSKernAttributeName];
     }
     
     NSString *fontFamily = dictionary[familyKey];
