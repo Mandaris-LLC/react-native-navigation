@@ -4,7 +4,6 @@
     <application>
         <activity
             android:name=".controllers.NavigationActivity"
-            android:screenOrientation="sensorPortrait"
             android:windowSoftInputMode="adjustPan"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"/>
         <activity
