@@ -145,8 +145,7 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
                                                                          style:UIBarButtonItemStylePlain
                                                                         target:nil
                                                                         action:nil];
-            
-            self.topViewController.navigationItem.backBarButtonItem = backItem;
+             self.topViewController.navigationItem.backBarButtonItem = backItem;
         } else {
             self.topViewController.navigationItem.backBarButtonItem = nil;
         }
@@ -220,7 +219,11 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
             [self.view.layer addAnimation:transition forKey:kCATransition];
             if([goBackScreensCount intValue]>1){
                 NSArray *viewControllers = [self viewControllers];
-                id obj=[viewControllers objectAtIndex:([viewControllers count] - 1 - [goBackScreensCount intValue]) ];
+                unsigned long index = ([viewControllers count] - 1 - [goBackScreensCount intValue]);
+                if (index < 0) {
+                    index = 0;
+                }
+                id obj=[viewControllers objectAtIndex:index];
                 [self  popToViewController:obj animated:NO];
             }else{
                 [self popViewControllerAnimated:NO];
@@ -228,7 +231,11 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
         } else {
             if([goBackScreensCount intValue] > 1 ){
                 NSArray *viewControllers = [self viewControllers];
-                id obj=[viewControllers objectAtIndex:([viewControllers count] - 1 - [goBackScreensCount intValue])];
+                unsigned long index = ([viewControllers count] - 1 - [goBackScreensCount intValue]);
+                if (index < 0) {
+                    index = 0;
+                }
+                id obj=[viewControllers objectAtIndex:index];
                 [self  popToViewController:obj animated:YES];
             }else{
                 [self popViewControllerAnimated:animated];
@@ -434,6 +441,9 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
         UIBarButtonItem *barButtonItem;
         if (iconImage) {
             barButtonItem = [[UIBarButtonItem alloc] initWithImage:iconImage style:UIBarButtonItemStylePlain target:self action:@selector(onButtonPress:)];
+            if([side isEqualToString:@"left"]){
+                barButtonItem.imageInsets = UIEdgeInsetsMake(2, -8, -2, 0);
+            }
         }
         else if (title) {
             barButtonItem = [[UIBarButtonItem alloc] initWithTitle:title style:UIBarButtonItemStylePlain target:self action:@selector(onButtonPress:)];
