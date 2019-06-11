@@ -95,7 +95,7 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
 -(UIView *)overlayView {
     if (!_overlayView) {
         _overlayView = [[UIView alloc] initWithFrame:self.bounds];
-        _overlayView.userInteractionEnabled = NO;
+        _overlayView.userInteractionEnabled = YES;
         _overlayView.alpha = 0.0;
     }
     return _overlayView;
@@ -195,8 +195,8 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
     self = [super init];
     if(self){
         [self setCenterViewController:centerViewController];
-        [self setLeftDrawerViewController:leftDrawerViewController];
-        [self setRightDrawerViewController:rightDrawerViewController];
+        [self setLeftDrawerViewController:[[UINavigationController alloc] initWithRootViewController: leftDrawerViewController]];
+        [self setRightDrawerViewController:[[UINavigationController alloc] initWithRootViewController: rightDrawerViewController]];
     }
     return self;
 }
@@ -286,7 +286,8 @@ static NSString *MMDrawerOpenSideKey = @"MMDrawerOpenSide";
             self.openSide == MMDrawerSideLeft) ||
            (drawerSide == MMDrawerSideRight &&
             self.openSide == MMDrawerSideRight)){
-               [self closeDrawerAnimated:animated completion:completion];
+               [self
+                closeDrawerAnimated:animated completion:completion];
            }
         else if(completion){
             completion(NO);

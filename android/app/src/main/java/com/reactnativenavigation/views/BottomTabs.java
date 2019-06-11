@@ -3,6 +3,7 @@ package com.reactnativenavigation.views;
 import android.content.Context;
 import android.graphics.Color;
 import android.text.TextUtils;
+import android.util.Log;
 
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigation;
 import com.aurelhubert.ahbottomnavigation.AHBottomNavigationItem;
@@ -21,7 +22,7 @@ public class BottomTabs extends AHBottomNavigation {
 
     public BottomTabs(Context context) {
         super(context);
-        setForceTint(true);
+        setForceTint(false);
         setId(ViewUtils.generateViewId());
         createVisibilityAnimator();
         setStyle();
@@ -36,11 +37,14 @@ public class BottomTabs extends AHBottomNavigation {
                     Color.GRAY);
             addItem(item);
             setOnTabSelectedListener(onTabSelectedListener);
+            Log.d("added tab", params.toString());
         }
         setTitlesDisplayState();
     }
 
     public void setStyleFromScreen(StyleParams params) {
+        Log.d("added tab", params.toString());
+
         if (params.bottomTabsColor.hasColor()) {
             setBackgroundColor(params.bottomTabsColor);
         }
@@ -71,7 +75,7 @@ public class BottomTabs extends AHBottomNavigation {
                 item.setTitle(params.tabLabel);
                 tabNeedsRefresh = true;
             }
-
+Log.d("added tab", tabNeedsRefresh ? "true" : "false");
             if (tabNeedsRefresh) {
                 this.refresh();
             }
@@ -111,6 +115,7 @@ public class BottomTabs extends AHBottomNavigation {
     }
 
     public void setCurrentItemWithoutInvokingTabSelectedListener(Integer index) {
+        Log.d("added tab", index.toString());
         setCurrentItem(index, false);
     }
 

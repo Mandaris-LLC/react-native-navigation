@@ -494,6 +494,7 @@ NSString const *CALLBACK_ASSOCIATED_ID = @"RCCNavigationController.CALLBACK_ASSO
             barButtonItem.accessibilityIdentifier = testID;
         }
     }
+    viewController.navigationItem.leftItemsSupplementBackButton = true;
     
     if ([side isEqualToString:@"left"]) {
         [viewController.navigationItem setLeftBarButtonItems:barButtonItems animated:animated];

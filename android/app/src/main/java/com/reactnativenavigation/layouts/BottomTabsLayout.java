@@ -331,6 +331,7 @@ public class BottomTabsLayout extends BaseLayout implements AHBottomNavigation.O
         return false;
     }
 
+
     @Override
     public void showContextualMenu(String screenInstanceId, ContextualMenuParams params, Callback onButtonClicked) {
         getCurrentScreenStack().peek().showContextualMenu(params, onButtonClicked);
