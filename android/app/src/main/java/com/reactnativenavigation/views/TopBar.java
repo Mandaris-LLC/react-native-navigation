@@ -149,7 +149,10 @@ public class TopBar extends AppBarLayout {
         view.setOnDisplayListener(new Screen.OnDisplayListener() {
             @Override
             public void onDisplay() {
-                view.getLayoutParams().width = (int) (float) view.getChildAt(0).getMeasuredWidth();
+                int width = (int) (float) view.getChildAt(0).getMeasuredWidth();
+                if (width <= 0 && view.screenId.equalsIgnoreCase("NewsCustomTitle")) {
+                    width = (int) (float)  ViewUtils.convertDpToPixel(150);
+                }
                 ((ActionBar.LayoutParams) view.getLayoutParams()).gravity = Gravity.CENTER;
                 view.requestLayout();
             }

@@ -12,7 +12,7 @@ import com.reactnativenavigation.utils.ViewUtils;
 import com.reactnativenavigation.views.utils.ViewMeasurer;
 
 public class ContentView extends ReactRootView {
-    private final String screenId;
+    public final String screenId;
     private final NavigationParams navigationParams;
     private Bundle initialProps;
 
