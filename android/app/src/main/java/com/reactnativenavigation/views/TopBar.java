@@ -153,6 +153,7 @@ public class TopBar extends AppBarLayout {
                 if (width <= 0 && view.screenId.equalsIgnoreCase("NewsCustomTitle")) {
                     width = (int) (float)  ViewUtils.convertDpToPixel(150);
                 }
+                view.getLayoutParams().width = width;
                 ((ActionBar.LayoutParams) view.getLayoutParams()).gravity = Gravity.CENTER;
                 view.requestLayout();
             }
